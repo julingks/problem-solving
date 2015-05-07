@@ -5,7 +5,7 @@
 * [http://minesweeperonline.com/](http://minesweeperonline.com/)
 
 ## Languages
-* [javscript](/js)
+* [javscript](js)
 
 
 
