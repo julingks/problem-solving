@@ -1,15 +1,15 @@
 # Problem Solving
 
-This repository is for tranning problem solving.
+문제해결 연습
 
-## Sovled Problem
+## Sovled Problems
 * [지뢰찾기](/mine_sweeper)
 
 ## Book
 * 알고리즘 문제 해결 전략 1,2
 * https://algospot.com/
 
-## Reference
+## References
 * http://codeforces.com/contests
 * https://www.acmicpc.net/contest/list
 * https://www.acmicpc.net/
