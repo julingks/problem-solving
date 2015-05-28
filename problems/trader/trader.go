@@ -19,4 +19,20 @@ func main() {
 		fmt.Fscanf(f, "%d", &arr[i])
 	}
 	fmt.Println(arr)
+	maxArr := make([]int, n)
+	max := arr[n-1]
+	for i := n - 1; i >= 0; i-- {
+		if max < arr[i] {
+			max = arr[i]
+		}
+		maxArr[i] = max
+	}
+	fmt.Println(maxArr)
+	profit := 0
+	for i := 0; i < n; i++ {
+		if maxArr[i]-arr[i] > profit {
+			profit = maxArr[i] - arr[i]
+		}
+	}
+	fmt.Println("answer:", profit)
 }
