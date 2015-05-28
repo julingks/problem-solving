@@ -17,11 +17,10 @@ type Rank struct {
 }
 
 var (
-	mux = &sync.Mutex{}
+	mux   *sync.Mutex = &sync.Mutex{}
+	words []string    = []string{"sun", "hello", "world"}
+	ranks []Rank
 )
-
-var words []string = []string{"sun", "hello", "world"}
-var ranks []Rank
 
 type ByScore []Rank
 
@@ -40,19 +39,28 @@ func handleConnect(conn net.Conn) {
 	w.WriteString("*******************************\n")
 	w.WriteString("What is your name ? ")
 	w.Flush()
+
+	// read name
 	name, _ := r.ReadString('\n')
 	name = strings.TrimSpace(name)
 	fmt.Println(name)
 	w.WriteString(fmt.Sprintln("Hello, ", name))
 
+	// word & tword init
 	word := words[rand.Intn(len(words))]
 	tword := strings.Repeat("_", len(word))
+
 	for life > 0 {
 		w.WriteString(fmt.Sprintln("Word: ", tword))
 		w.WriteString(fmt.Sprintf("(LIFE: %d SCORE: %d ) Your guess > ", life, score))
 		w.Flush()
 		str, _ := r.ReadString('\n')
 		str = strings.TrimSpace(str)
+		if len(str) > 1 {
+			w.WriteString(fmt.Sprintln("Input only one character!"))
+			w.Flush()
+			continue
+		}
 
 		if strings.Contains(word, str) && !strings.Contains(tword, str) {
 			for i, s := range word {
