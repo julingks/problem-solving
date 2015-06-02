@@ -4,7 +4,7 @@
 
 * [http://minesweeperonline.com/](http://minesweeperonline.com/)
 
-## Languages
+## Solutions
 * [javscript](js)
 
 
