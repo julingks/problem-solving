@@ -19,3 +19,13 @@ $ ./hello
 $ g++ heloo.cpp -o hello
 ```
 
+* lua
+```
+$ lua hello.lua
+```
+
+* scala
+```
+$ scalac hello.scala
+$ scala -cp . Main
+```
