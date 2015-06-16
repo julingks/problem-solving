@@ -1,0 +1,7 @@
+http://www.naver.com/
+http://www.google.com/
+http://www.daum.net/
+http://lazy.devscake.com/delay/100
+http://lazy.devscake.com/delay/500
+http://lazy.devscake.com/delay/1000
+http://lazy.devscake.com/delay/5000
