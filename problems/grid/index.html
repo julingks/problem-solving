@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src='http://code.jquery.com/jquery-1.11.2.min.js'></script>
+  <script type="text/javascript"> 
+    function changeBg(obj) {
+      $(obj).css("background-color",$("#color").val())
+    }
+    function drawBox(obj) {
+      var x = parseInt($(obj).attr("coordX"))
+      var y = parseInt($(obj).attr("coordY"))
+      for (i=y-1;i<y+2;i++) {
+        for (j=x-1;j<x+2;j++) {
+          changeBg($(".box[coordX='"+j+"'][coordY='"+i+"']"))
+        }
+      }
+    }
+    function drawDiamond(obj) {
+      drawBox(obj)
+      var x = parseInt($(obj).attr("coordX"))
+      var y = parseInt($(obj).attr("coordY"))
+      var coords = [{x:0,y:-2}, {x:0,y:2}, {x:-2,y:0}, {x:2,y:0}]
+      for (var i in coords ) {
+        changeBg($(".box[coordX='"+(x+coords[i].x)+"'][coordY='"+(y+coords[i].y)+"']"))
+      }
+    }
+    $(document).ready(function() {
+      for (i=0;i<10;i++) {
+        row = $("<div />").addClass("row");
+        for (j=0;j<10;j++) {
+          $(row).append($("<div />").addClass("box").addClass("row-"+i).addClass("col-"+j).attr("coordY", i).attr("coordX",j));
+        }
+        $("#grid").append(row)
+      }
+      $(".box").mouseover(function() { $(this).addClass("mouse-over"); })
+      $(".box").mouseleave(function() { $(this).removeClass("mouse-over"); })
+      $("#clear").click(function() { $(".box").css("background-color","transparent"); })
+      $(".box").mousedown(function() {
+        if ($("#shape").val() == "point") changeBg(this);
+        if ($("#shape").val() == "col") changeBg($(".col-"+$(this).attr("coordX")));
+        if ($("#shape").val() == "row") changeBg($(".row-"+$(this).attr("coordY")));
+        if ($("#shape").val() == "box") drawBox(this);
+        if ($("#shape").val() == "diamond") drawDiamond(this);
+      })
+    })
+  </script>
+<style>
+.mouse-over {
+  background-color:#e1e1e1 !important;
+}
+.row {
+  clear:both;
+}
+.box {
+  float:left;
+  width:50px;
+  height:50px;
+  border:1px solid black;
+}
+</style>
+</head>
+<body>
+  Color : 
+  <select id="color">
+    <option value="red">RED</option>
+    <option value="blue">BLUE</option>
+    <option value="yellow">YELLOW</option>
+  </select>
+  Shape : 
+  <select id="shape">
+    <option value="point">Point</option>
+    <option value="row">Row</option>
+    <option value="col">Column</option>
+    <option value="box">Box</option>
+    <option value="diamond">Diamond</option>
+  </select>
+  <input id="clear" type="button" value="Clear" />
+  <div id="grid"></div>
+</body>
+</html>
